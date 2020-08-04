@@ -1,0 +1,28 @@
+AbsoluteLayout {
+  height: 100%;
+  border-color: plum;
+  border-width: 2;
+}
+Label {
+  height: 50;
+  width: 50;
+}
+#l1 {
+  background: rebeccapurple;
+  top: 130;
+  left: 90;
+}
+#l2 {
+  background-color: orange;
+  top: 100;
+  left: 60;
+}
+#l3 {
+  background-color: palegreen;
+  top: 250;
+  left: 50%;
+}
+
+Button {
+  top: 90%;
+}
