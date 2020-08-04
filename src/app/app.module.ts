@@ -4,6 +4,7 @@ import { NativeScriptModule, NativeScriptFormsModule } from "@nativescript/angul
 import { AppComponent } from "./app.component";
 import { CurrentChallangeComponent } from "./challanges/current-challange/current-challange.component";
 import { StackComponent } from './layouts/stack/stack.component';
+import { FlexboxComponent } from './layouts/flexbox/flexbox.component';
 
 // Uncomment and add to NgModule imports if you need to use the HttpClient wrapper
 // import { NativeScriptHttpClientModule } from "nativescript-angular/http-client";
@@ -11,7 +12,7 @@ import { StackComponent } from './layouts/stack/stack.component';
 @NgModule({
     bootstrap: [AppComponent],
     imports: [NativeScriptModule, NativeScriptFormsModule],
-    declarations: [AppComponent, CurrentChallangeComponent, StackComponent],
+    declarations: [AppComponent, CurrentChallangeComponent, StackComponent, FlexboxComponent],
     providers: [],
     schemas: [NO_ERRORS_SCHEMA],
 })

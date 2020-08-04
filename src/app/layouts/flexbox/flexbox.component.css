@@ -1,0 +1,23 @@
+FlexboxLayout {
+    justify-content: space-around;
+    align-items: center;
+    height: 250;
+    border-color: plum;
+    border-width: 2;
+}
+Label {
+  height: 50;
+  width: 50;
+}
+#l1 {
+  background: rebeccapurple;
+  align-self: flex-end;
+}
+#l2 {
+  background-color: orange;
+  align-self: flex-start;
+}
+#l3 {
+  background-color: palegreen;
+  align-self: stretch;
+}
