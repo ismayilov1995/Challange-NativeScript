@@ -1,0 +1,17 @@
+GridLayout {
+    border-color: plum;
+    border-width: 2;
+}
+/* Label {
+  height: 50;
+  width: 50;
+} */
+#l1 {
+  background: rebeccapurple;
+}
+#l2 {
+  background-color: orange;
+}
+#l3 {
+  background-color: palegreen;
+}
