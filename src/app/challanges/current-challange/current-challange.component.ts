@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Input } from "@angular/core";
 
 @Component({
     selector: "ns-current-challange",
@@ -6,14 +6,10 @@ import { Component, OnInit } from "@angular/core";
     styleUrls: ["current-challange.component.css"],
 })
 export class CurrentChallangeComponent implements OnInit {
-    challangeDescription = "";
-    currentChallange: string;
+    @Input() currentChallange: string;
 
     constructor() {}
 
     ngOnInit() {}
 
-    onSetChallange(): void {
-        this.currentChallange = this.challangeDescription
-    }
 }

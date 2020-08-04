@@ -1,3 +1,6 @@
-<GridLayout>
-  <ns-current-challange></ns-current-challange>
-</GridLayout>
+<StackLayout>
+  <ns-challange-edit (input)="onChallangeInput($event)"></ns-challange-edit>
+  <ns-current-challange
+    [currentChallange]="enteredChallange"
+  ></ns-current-challange>
+</StackLayout>

@@ -5,13 +5,3 @@
     font-weight: bold;
     margin-top: 10;
 }
-
-Button {
-    color: #fff;
-    height: 30;
-    width: 100%;
-    border-width: 1;
-    border-color: #9c1f9c;
-    border-radius: 30%;
-    background-color: #9c1f9c;
-}
