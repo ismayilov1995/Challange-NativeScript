@@ -1,10 +1,9 @@
-<ScrollView>
-  <StackLayout>
-    <Label
-      class="title"
-      [text]="challange"
-      horizontalAlignment="center"
-      *ngFor="let challange of challanges"
-    ></Label>
-  </StackLayout>
-</ScrollView>
+<ListView [items]="challanges" (itemTap)="onItemTap($event)" iosEstimatedRowHeight="75">
+  <ng-template let-challange="item">
+    <GridLayout rows="40,30" columns="50,*">
+      <Label text="Pox" row="0" col="0" rowSpan="2"></Label>
+      <Label text="Item content" row="0" col="1"></Label>
+      <Label [text]="challange" row="1" col="1"></Label>
+    </GridLayout>
+  </ng-template>
+</ListView>

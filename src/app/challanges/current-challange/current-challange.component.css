@@ -5,3 +5,7 @@
     font-weight: bold;
     margin-top: 10;
 }
+Label {
+    border-width: 1;
+    border-color: purple;
+}
