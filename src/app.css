@@ -1,7 +1,7 @@
 @import "~@nativescript/theme/css/core.css";
 @import "~@nativescript/theme/css/default.css";
 
-Button {
+.btn {
     width: 250;
     padding: 5 10;
     color: #fff;
@@ -9,6 +9,7 @@ Button {
     border-width: 1;
     border-color: #9c1f9c;
     border-radius: 30%;
+    margin: 5 0;
 }
 
 Button.-primary {
