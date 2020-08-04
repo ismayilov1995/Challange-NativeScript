@@ -5,9 +5,9 @@ import { Component } from "@angular/core";
     templateUrl: "./app.component.html",
 })
 export class AppComponent {
-    enteredChallange = "";
+    challanges: string[] = [];
 
     onChallangeInput(challangeDesc: string) {
-        this.enteredChallange = challangeDesc;
+        this.challanges.push(challangeDesc);
     }
 }

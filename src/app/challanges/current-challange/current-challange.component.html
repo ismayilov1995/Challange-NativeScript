@@ -1,7 +1,10 @@
-<StackLayout>
-  <Label
-    class="title"
-    [text]="currentChallange"
-    horizontalAlignment="center"
-  ></Label>
-</StackLayout>
+<ScrollView>
+  <StackLayout>
+    <Label
+      class="title"
+      [text]="challange"
+      horizontalAlignment="center"
+      *ngFor="let challange of challanges"
+    ></Label>
+  </StackLayout>
+</ScrollView>

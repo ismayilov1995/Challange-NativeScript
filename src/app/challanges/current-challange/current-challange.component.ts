@@ -6,7 +6,7 @@ import { Component, OnInit, Input } from "@angular/core";
     styleUrls: ["current-challange.component.css"],
 })
 export class CurrentChallangeComponent implements OnInit {
-    @Input() currentChallange: string;
+    @Input() challanges: string[] = [];
 
     constructor() {}
 
