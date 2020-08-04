@@ -15,6 +15,6 @@ export class ChallangeEditComponent implements OnInit {
 
     onSetChallange(): void {
         this.input.emit(this.challangeDescription);
-        this.challangeDescription = '';
+        this.challangeDescription = "";
     }
 }

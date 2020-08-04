@@ -7,13 +7,9 @@ import { ItemEventData } from "tns-core-modules/ui/list-view";
     styleUrls: ["current-challange.component.css"],
 })
 export class CurrentChallangeComponent implements OnInit {
-    @Input() challanges: string[] = [];
+    @Input() challangeTitle: string;
 
     constructor() {}
 
     ngOnInit() {}
-
-    onItemTap(e: ItemEventData): void {
-        console.log(e);
-    }
 }
