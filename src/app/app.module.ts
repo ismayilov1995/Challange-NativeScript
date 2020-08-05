@@ -14,6 +14,7 @@ import { AbsoluteComponent } from "./layouts/absolute/absolute.component";
 import { AuthComponent } from "./auth/auth.component";
 import { TodayComponent } from "./challanges/today/today.component";
 import { AppRoutingModule } from "./app-routing.module";
+import { ActionBarComponent } from './shared/ui/action-bar/action-bar.component';
 
 // Uncomment and add to NgModule imports if you need to use the HttpClient wrapper
 // import { NativeScriptHttpClientModule } from "nativescript-angular/http-client";
@@ -31,6 +32,7 @@ import { AppRoutingModule } from "./app-routing.module";
         AbsoluteComponent,
         AuthComponent,
         TodayComponent,
+        ActionBarComponent,
     ],
     providers: [],
     schemas: [NO_ERRORS_SCHEMA],
