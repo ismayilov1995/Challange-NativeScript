@@ -1,5 +1,4 @@
-import { Component, OnInit, Input } from "@angular/core";
-import { ItemEventData } from "tns-core-modules/ui/list-view";
+import { Component, OnInit } from "@angular/core";
 
 @Component({
     selector: "ns-current-challange",
@@ -7,7 +6,6 @@ import { ItemEventData } from "tns-core-modules/ui/list-view";
     styleUrls: ["current-challange.component.css"],
 })
 export class CurrentChallangeComponent implements OnInit {
-    @Input() challangeTitle: string;
 
     constructor() {}
 

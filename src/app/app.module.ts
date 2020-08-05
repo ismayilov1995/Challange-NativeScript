@@ -11,13 +11,16 @@ import { StackComponent } from "./layouts/stack/stack.component";
 import { FlexboxComponent } from "./layouts/flexbox/flexbox.component";
 import { GridComponent } from "./layouts/grid/grid.component";
 import { AbsoluteComponent } from "./layouts/absolute/absolute.component";
+import { AuthComponent } from "./auth/auth.component";
+import { TodayComponent } from "./challanges/today/today.component";
+import { AppRoutingModule } from "./app-routing.module";
 
 // Uncomment and add to NgModule imports if you need to use the HttpClient wrapper
 // import { NativeScriptHttpClientModule } from "nativescript-angular/http-client";
 
 @NgModule({
     bootstrap: [AppComponent],
-    imports: [NativeScriptModule, NativeScriptFormsModule],
+    imports: [NativeScriptModule, NativeScriptFormsModule, AppRoutingModule],
     declarations: [
         AppComponent,
         CurrentChallangeComponent,
@@ -26,6 +29,8 @@ import { AbsoluteComponent } from "./layouts/absolute/absolute.component";
         FlexboxComponent,
         GridComponent,
         AbsoluteComponent,
+        AuthComponent,
+        TodayComponent,
     ],
     providers: [],
     schemas: [NO_ERRORS_SCHEMA],
