@@ -16,17 +16,17 @@ export class ChallangeTabsComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        // this.router.navigate(
-        //     [
-        //         {
-        //             outlets: {
-        //                 currentChallange: ["current-challange"],
-        //                 today: ["today"],
-        //             },
-        //         },
-        //     ],
-        //     { relativeTo: this.route }
-        // );
+        this.router.navigate(
+            [
+                {
+                    outlets: {
+                        currentChallange: ["current-challange"],
+                        today: ["today"],
+                    },
+                },
+            ],
+            { relativeTo: this.route }
+        );
         this.page.actionBarHidden = true;
     }
 }
