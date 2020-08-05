@@ -5,12 +5,23 @@ import { AuthComponent } from "./auth/auth.component";
 import { TodayComponent } from "./challanges/today/today.component";
 import { CurrentChallangeComponent } from "./challanges/current-challange/current-challange.component";
 import { ChallangeEditComponent } from "./challanges/challange-edit/challange-edit.component";
+import { ChallangeTabsComponent } from "./challanges/challange-tabs/challange-tabs.component";
 
 const routes: Routes = [
     { path: "", component: AuthComponent, pathMatch: "full" },
-    { path: "today", component: TodayComponent },
-    { path: "current-challange", component: CurrentChallangeComponent },
     { path: "edit-challange", component: ChallangeEditComponent },
+    {
+        path: "challanges",
+        component: ChallangeTabsComponent,
+        children: [
+            { path: "today", component: TodayComponent, outlet: "today" },
+            {
+                path: "current-challange",
+                component: CurrentChallangeComponent,
+                outlet: "currentChallange",
+            },
+        ],
+    },
 ];
 
 @NgModule({
