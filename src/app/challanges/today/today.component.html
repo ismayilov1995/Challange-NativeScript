@@ -1,1 +1,11 @@
-<Button text="today works!" class="btn btn-primary" nsRouterLink=""></Button>
+<ActionBar title="Today's challange" (loaded)="onLoadedActionBar()">
+  <NavigationButton android.systemIcon="ic_menu_back"></NavigationButton>
+</ActionBar>
+<StackLayout>
+  <Label text="Today"></Label>
+  <Button
+    text="Current Challange"
+    class="btn btn-primary"
+    nsRouterLink="/current-challange"
+  ></Button>
+</StackLayout>
