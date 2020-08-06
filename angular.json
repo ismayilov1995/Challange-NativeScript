@@ -4,15 +4,15 @@
   "newProjectRoot": "projects",
   "cli": {
     "defaultCollection": "@nativescript/schematics",
-    "analytics": "cba83e23-3e22-4bb4-9932-d227e698db6d"
+    "analytics": false
   },
   "projects": {
-    "hello-world": {
+    "drawer-navigation": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
       "prefix": "ns"
     }
   },
-  "defaultProject": "hello-world"
+  "defaultProject": "drawer-navigation"
 }

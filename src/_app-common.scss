@@ -1,0 +1,19 @@
+@import "~@nativescript/theme/core";
+@import "~@nativescript/theme/blue";
+
+.drawer-content {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20;
+  background: linear-gradient(140deg, #2b0c72, #5c3fa0);
+}
+.btn {
+  color: #fff;
+  height: 30;
+  width: 100%;
+  border-width: 1;
+  border-color: #9c1f9c;
+  border-radius: 30%;
+  background-color: #9c1f9c;
+}

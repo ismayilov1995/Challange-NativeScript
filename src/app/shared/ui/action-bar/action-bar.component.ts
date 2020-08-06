@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from "@angular/core";
 import { isAndroid } from "tns-core-modules/platform";
 import { Page } from "tns-core-modules/ui/page";
 import { RouterExtensions } from "@nativescript/angular";
+import { UIService } from "../ui.service";
 
 declare let android: any;
 
@@ -12,13 +13,23 @@ declare let android: any;
 })
 export class ActionBarComponent implements OnInit {
     @Input() title: string;
+    @Input() showBackButton = true;
+    @Input() hasMenu = true;
 
-    constructor(private page: Page, private router: RouterExtensions) {}
+    constructor(
+        private page: Page,
+        private router: RouterExtensions,
+        private uiService: UIService
+    ) {}
 
     ngOnInit() {}
 
+    get isAndroid(): boolean {
+        return isAndroid;
+    }
+
     get canGoBack(): boolean {
-        return this.router.canGoBack();
+        return this.router.canGoBack() && this.showBackButton;
     }
 
     onGoBack(): void {
@@ -27,13 +38,17 @@ export class ActionBarComponent implements OnInit {
 
     onLoadedActionBar(): void {
         if (isAndroid) {
-            const actionIcon = this.page.actionBar.nativeView.getNavigationIcon();
-            if (actionIcon) {
-                actionIcon.setColorFilter(
+            const backButton = this.page.actionBar.nativeView.getNavigationIcon();
+            if (backButton) {
+                backButton.setColorFilter(
                     android.graphics.Color.parseColor("#171717"),
-                    android.graphics.PorterDuff.Mode.SRC_ATOP
+                    (<any>android.graphics).PorterDuff.Mode.SRC_ATOP
                 );
             }
         }
+    }
+
+    onToggleMenu(): void {
+        this.uiService.toggleDrawer();
     }
 }

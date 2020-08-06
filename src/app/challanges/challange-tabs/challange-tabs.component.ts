@@ -20,7 +20,7 @@ export class ChallangeTabsComponent implements OnInit {
             [
                 {
                     outlets: {
-                        currentChallange: ["current-challange"],
+                        currentChallenge: ["current-challenge"],
                         today: ["today"],
                     },
                 },
