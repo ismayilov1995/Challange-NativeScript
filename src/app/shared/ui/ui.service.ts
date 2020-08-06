@@ -13,6 +13,6 @@ export class UIService {
     }
 
     toggleDrawer() {
-        this._drawerState.next();
+        this._drawerState.next(null);
     }
 }
