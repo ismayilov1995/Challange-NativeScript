@@ -5,6 +5,7 @@ import {
     ViewChild,
     AfterViewInit,
     ChangeDetectorRef,
+    ViewContainerRef,
 } from "@angular/core";
 import { UIService } from "./shared/ui/ui.service";
 import { Subscribable, Subscription } from "rxjs";
@@ -24,10 +25,12 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
 
     constructor(
         private uiService: UIService,
-        private changeDetectionRef: ChangeDetectorRef
+        private changeDetectionRef: ChangeDetectorRef,
+        private vcRef: ViewContainerRef
     ) {}
 
     ngOnInit(): void {
+        this.uiService.setRootVCRef(this.vcRef);
         this.subs = this.uiService.drawerState.subscribe(() => {
             if (this.drawer) {
                 this.drawer.toggleDrawerState();
