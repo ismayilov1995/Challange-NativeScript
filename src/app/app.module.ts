@@ -3,6 +3,7 @@ import {
     NativeScriptModule,
     NativeScriptFormsModule,
 } from "@nativescript/angular";
+import { NativeScriptUISideDrawerModule } from "nativescript-ui-sidedrawer/angular";
 
 import { AppComponent } from "./app.component";
 import { CurrentChallangeComponent } from "./challanges/current-challange/current-challange.component";
@@ -23,6 +24,7 @@ import { ChallangeTabsComponent } from "./challanges/challange-tabs/challange-ta
         NativeScriptModule,
         NativeScriptFormsModule,
         AppRoutingModule,
+        NativeScriptUISideDrawerModule,
     ],
     declarations: [
         AppComponent,
