@@ -21,6 +21,10 @@ export class ActionBarComponent implements OnInit {
         return this.router.canGoBack();
     }
 
+    get isAndroid(): boolean {
+        return isAndroid;
+    }
+
     onGoBack(): void {
         this.router.backToPreviousPage();
     }
