@@ -17,6 +17,7 @@ import { TodayComponent } from "./challanges/today/today.component";
 import { AppRoutingModule } from "./app-routing.module";
 import { ActionBarComponent } from "./shared/ui/action-bar/action-bar.component";
 import { ChallangeTabsComponent } from "./challanges/challange-tabs/challange-tabs.component";
+import { DayModalComponent } from "./challanges/day-modal/day-modal.component";
 
 @NgModule({
     bootstrap: [AppComponent],
@@ -38,8 +39,10 @@ import { ChallangeTabsComponent } from "./challanges/challange-tabs/challange-ta
         TodayComponent,
         ActionBarComponent,
         ChallangeTabsComponent,
+        DayModalComponent,
     ],
     providers: [],
+    entryComponents: [DayModalComponent],
     schemas: [NO_ERRORS_SCHEMA],
 })
 export class AppModule {}
