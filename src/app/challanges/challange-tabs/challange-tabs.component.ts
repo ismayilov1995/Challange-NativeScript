@@ -27,6 +27,6 @@ export class ChallangeTabsComponent implements OnInit {
             ],
             { relativeTo: this.route }
         );
-        // this.page.actionBarHidden = true;
+        this.page.actionBarHidden = true;
     }
 }
