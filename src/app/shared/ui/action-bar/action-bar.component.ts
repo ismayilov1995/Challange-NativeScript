@@ -33,7 +33,6 @@ export class ActionBarComponent implements OnInit {
     onToggleMenu(): void {
         this.uiService.toggleDrawer();
     }
-
     onGoBack(): void {
         this.router.backToPreviousPage();
     }
