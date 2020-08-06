@@ -16,7 +16,8 @@ import { RadSideDrawer } from "nativescript-ui-sidedrawer";
     templateUrl: "./app.component.html",
 })
 export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
-    @ViewChild(RadSideDrawerComponent) drawerComponent: RadSideDrawerComponent;
+    @ViewChild(RadSideDrawerComponent, { static: true })
+    drawerComponent: RadSideDrawerComponent;
     challangeTitle: string;
     private subs: Subscription;
     private drawer: RadSideDrawer;
