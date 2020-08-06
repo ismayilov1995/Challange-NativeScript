@@ -8,15 +8,17 @@ import { PageRoute } from "nativescript-angular/router";
     styleUrls: ["./challange-edit.component.css"],
 })
 export class ChallangeEditComponent implements OnInit {
-    challangeDescription = "";
+    isCreating = true;
 
     constructor(private route: ActivatedRoute, private pageRoute: PageRoute) {}
 
     ngOnInit(): void {
         this.pageRoute.activatedRoute.subscribe((activatedRoute) => {
             activatedRoute.paramMap.subscribe((param) => {
-                if (param.has("mode")) {
-                    console.log(param.get("mode"));
+                if (!param.has("mode")) {
+                    this.isCreating = true;
+                } else {
+                    this.isCreating = param.get("mode") !== "edit";
                 }
             });
         });
