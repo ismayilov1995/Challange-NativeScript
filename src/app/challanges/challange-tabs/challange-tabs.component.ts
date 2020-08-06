@@ -20,13 +20,13 @@ export class ChallangeTabsComponent implements OnInit {
             [
                 {
                     outlets: {
-                        currentChallange: ["current-challange"],
+                        currentChallenge: ["current-challenge"],
                         today: ["today"],
                     },
                 },
             ],
             { relativeTo: this.route }
         );
-        this.page.actionBarHidden = true;
+        // this.page.actionBarHidden = true;
     }
 }

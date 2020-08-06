@@ -16,7 +16,6 @@ export class ActionBarComponent implements OnInit {
     @Input() showBackButton = true;
     @Input() hasMenu = true;
 
-
     constructor(
         private page: Page,
         private router: RouterExtensions,
@@ -26,7 +25,7 @@ export class ActionBarComponent implements OnInit {
     ngOnInit() {}
 
     get canGoBack(): boolean {
-        return this.router.canGoBack();
+        return this.router.canGoBack() && this.showBackButton;
     }
 
     get isAndroid(): boolean {
@@ -42,11 +41,11 @@ export class ActionBarComponent implements OnInit {
 
     onLoadedActionBar(): void {
         if (isAndroid) {
-            const actionIcon = this.page.actionBar.nativeView.getNavigationIcon();
-            if (actionIcon) {
-                actionIcon.setColorFilter(
+            const backButton = this.page.actionBar.nativeView.getNavigationIcon();
+            if (backButton) {
+                backButton.setColorFilter(
                     android.graphics.Color.parseColor("#171717"),
-                    android.graphics.PorterDuff.Mode.SRC_ATOP
+                    (<any>android.graphics).PorterDuff.Mode.SRC_ATOP
                 );
             }
         }
