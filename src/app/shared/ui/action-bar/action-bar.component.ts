@@ -27,12 +27,13 @@ export class ActionBarComponent implements OnInit {
 
     onLoadedActionBar(): void {
         if (isAndroid) {
-            this.page.actionBar.nativeView
-                .getNavigationIcon()
-                .setColorFilter(
+            const actionIcon = this.page.actionBar.nativeView.getNavigationIcon();
+            if (actionIcon) {
+                actionIcon.setColorFilter(
                     android.graphics.Color.parseColor("#171717"),
                     android.graphics.PorterDuff.Mode.SRC_ATOP
                 );
+            }
         }
     }
 }
