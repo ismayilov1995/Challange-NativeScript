@@ -4,7 +4,6 @@ import { Routes } from "@angular/router";
 import { AuthComponent } from "./auth/auth.component";
 import { TodayComponent } from "./challanges/today/today.component";
 import { CurrentChallangeComponent } from "./challanges/current-challange/current-challange.component";
-import { ChallangeEditComponent } from "./challanges/challange-edit/challange-edit.component";
 import { ChallangeTabsComponent } from "./challanges/challange-tabs/challange-tabs.component";
 
 const routes: Routes = [
@@ -28,7 +27,13 @@ const routes: Routes = [
                     },
                 ],
             },
-            { path: ":mode", component: ChallangeEditComponent },
+            {
+                path: ":mode",
+                loadChildren: () =>
+                    import(
+                        "./challanges/challange-edit/challenge-edit.module"
+                    ).then((mod) => mod.ChallengeEditModule),
+            },
             { path: "", redirectTo: "/challenges/tabs", pathMatch: "full" },
         ],
     },
