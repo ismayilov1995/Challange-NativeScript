@@ -1,9 +1,6 @@
 <ns-action-bar title="Today's Challange"></ns-action-bar>
-<StackLayout>
-  <Label class="h1" text="Today"></Label>
-  <Button
-    text="Current Challange"
-    class="btn-primary btn-rounded-lg"
-    nsRouterLink="/challenges/tabs/current-challenge"
-  ></Button>
-</StackLayout>
+<FlexboxLayout>
+  <Button class="btn btn-success btn-rounded-lg" text="Completed"></Button>
+  <Button class="btn btn-fail btn-rounded-lg" text="Failed"></Button>
+  <Label class="btn-flat" text="Reset"></Label>
+</FlexboxLayout>

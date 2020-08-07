@@ -1,5 +1,5 @@
 @import "~@nativescript/theme/core.compat";
-@import "~@nativescript/theme/orange.compat";
+@import "~@nativescript/theme/blue.compat";
 
 @import "./theme/colors";
 
@@ -35,4 +35,11 @@ ActionBar {
   justify-content: center;
   padding: 20;
   background: linear-gradient(140deg, #2b0c72, #5c3fa0);
+}
+
+.btn-flat {
+  color: $primary;
+  background: transparent;
+  border-color: transparent;
+  border-width: 1;
 }
