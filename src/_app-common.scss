@@ -7,11 +7,14 @@ $secondary: #2b0c72;
 $disabled: #ccc;
 $accent: #7c015d;
 
-/* This color was named $ab-background in Theme v1 */
 $complementary: fuchsia;
 
-/* The variables are loaded before the Core styles */
 @import '~@nativescript/theme/index';
+
+ActionBar {
+    background: $primary;
+    color: #fff;
+}
 
 // .drawer-content {
 //   flex-direction: column;
@@ -19,13 +22,4 @@ $complementary: fuchsia;
 //   justify-content: center;
 //   padding: 20;
 //   background: linear-gradient(140deg, #2b0c72, #5c3fa0);
-// }
-// .btn {
-//   color: #fff;
-//   height: 30;
-//   width: 100%;
-//   border-width: 1;
-//   border-color: #9c1f9c;
-//   border-radius: 30%;
-//   background-color: #9c1f9c;
 // }
