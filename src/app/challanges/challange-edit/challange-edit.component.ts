@@ -5,7 +5,7 @@ import { PageRoute } from "nativescript-angular/router";
 @Component({
     selector: "ns-challange-edit",
     templateUrl: "./challange-edit.component.html",
-    styleUrls: ["./challange-edit.component.css"],
+    styleUrls: ["./challange-edit.component.scss"],
 })
 export class ChallangeEditComponent implements OnInit {
     isCreating = true;

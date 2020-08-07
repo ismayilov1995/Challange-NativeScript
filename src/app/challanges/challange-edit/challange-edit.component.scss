@@ -1,0 +1,20 @@
+@import "../../../theme/colors";
+
+.form {
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.input-field {
+  width: 80%;
+  .label {
+    color: $primary;
+    font-weight: bold;
+  }
+  .input {
+    border-bottom-width: 2;
+    border-color: $primary;
+    width: 100%;
+  }
+}
