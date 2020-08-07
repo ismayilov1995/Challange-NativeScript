@@ -5,23 +5,21 @@
 $primary: #7c015d;
 $secondary: #2b0c72;
 $disabled: #ccc;
-$accent: rgb(206, 253, 94);
-
-$btn-color: $primary;
+$accent: #7c015d;
 
 /* This color was named $ab-background in Theme v1 */
 $complementary: fuchsia;
 
 /* The variables are loaded before the Core styles */
-@import "~@nativescript/theme/index";
+@import '~@nativescript/theme/index';
 
-.drawer-content {
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 20;
-  background: linear-gradient(140deg, #2b0c72, #5c3fa0);
-}
+// .drawer-content {
+//   flex-direction: column;
+//   align-items: center;
+//   justify-content: center;
+//   padding: 20;
+//   background: linear-gradient(140deg, #2b0c72, #5c3fa0);
+// }
 // .btn {
 //   color: #fff;
 //   height: 30;
