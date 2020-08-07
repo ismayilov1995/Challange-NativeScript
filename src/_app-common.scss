@@ -10,10 +10,29 @@ ActionBar {
   color: #fff;
 }
 
-// .drawer-content {
-//   flex-direction: column;
-//   align-items: center;
-//   justify-content: center;
-//   padding: 20;
-//   background: linear-gradient(140deg, #2b0c72, #5c3fa0);
-// }
+.form {
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.input-field {
+  width: 80%;
+  .label {
+    color: $primary;
+    font-weight: bold;
+  }
+  .input {
+    border-bottom-width: 2;
+    border-color: $primary;
+    width: 100%;
+  }
+}
+
+.drawer-content {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20;
+  background: linear-gradient(140deg, #2b0c72, #5c3fa0);
+}
