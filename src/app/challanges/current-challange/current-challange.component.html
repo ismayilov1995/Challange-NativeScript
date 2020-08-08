@@ -38,6 +38,7 @@
         *ngFor="let day of days; let i = index"
         [row]="getRow(i, day)"
         [col]="day.dayInWeek"
+        (tap)="onChangeStatus()"
       >
         <Label [text]="day.dayInMonth"></Label>
       </FlexboxLayout>
