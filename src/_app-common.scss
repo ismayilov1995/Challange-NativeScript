@@ -5,6 +5,8 @@
 
 @import "~@nativescript/theme/index";
 
+$main-font: "Oswald", "Oswald-Regular", "Oswald-Bold";
+
 ActionBar {
   background: $primary;
   color: #fff;
@@ -14,18 +16,19 @@ ActionBar {
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-}
-
-.input-field {
-  width: 80%;
-  .label {
-    color: $primary;
-    font-weight: bold;
-  }
-  .input {
-    border-bottom-width: 2;
-    border-color: $primary;
-    width: 100%;
+  .input-field {
+    width: 80%;
+    .label {
+      margin: 0;
+      color: $primary;
+      font-weight: 400;
+      font-family: $main-font;
+    }
+    .input {
+      border-bottom-width: 2;
+      border-color: $primary;
+      width: 100%;
+    }
   }
 }
 
@@ -40,6 +43,7 @@ ActionBar {
 .h1 {
   font-weight: bold;
   color: $primary;
+  font-family: $main-font;
 }
 
 .btn-flat {
@@ -50,5 +54,5 @@ ActionBar {
 }
 
 .fa {
-  font-family: 'FontAwesome', 'Font-Awesome';
+  font-family: "FontAwesome", "Font-Awesome";
 }
