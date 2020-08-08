@@ -24,6 +24,9 @@ ActionBar {
       font-weight: 400;
       font-family: $main-font;
     }
+    .invalid {
+      color: $fail;
+    }
     .input {
       border-bottom-width: 2;
       border-color: $primary;
@@ -64,4 +67,9 @@ ActionBar {
 
 .fa {
   font-family: "FontAwesome", "Font-Awesome";
+}
+
+.ng-invalid.ng-touched {
+  color: $fail;
+  border-bottom-color: $fail;
 }

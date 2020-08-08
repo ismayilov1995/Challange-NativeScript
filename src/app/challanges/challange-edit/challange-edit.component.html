@@ -4,7 +4,11 @@
 ></ns-action-bar>
 <FlexboxLayout class="form">
   <StackLayout class="input-field">
-    <Label class="label" text="Title"></Label>
+    <Label
+      class="label"
+      [ngClass]="{ invalid: titleCtrl.invalid && titleCtrl.touched }"
+      text="Title"
+    ></Label>
     <TextField
       ngModel
       #titleCtrl="ngModel"
@@ -13,13 +17,33 @@
       required
     ></TextField>
     <Label
+      class="text-danger"
       *ngIf="titleCtrl.invalid && titleCtrl.touched"
       text="Please input title"
     ></Label>
   </StackLayout>
   <StackLayout class="input-field">
-    <Label class="label" text="Description"></Label>
-    <TextView class="input" returnKeyType="done" required></TextView>
+    <Label
+      class="label"
+      [ngClass]="{ invalid: descCtrl.invalid && descCtrl.touched }"
+      text="Description"
+    ></Label>
+    <TextView
+      ngModel
+      #descCtrl="ngModel"
+      class="input"
+      returnKeyType="done"
+      required
+    ></TextView>
+    <Label
+      class="text-danger"
+      *ngIf="descCtrl.invalid && descCtrl.touched"
+      text="Please input description"
+    ></Label>
   </StackLayout>
-  <Button class="btn btn-primary" text="Save"></Button>
+  <Button
+    class="btn btn-primary"
+    text="Save"
+    [isEnabled]="titleCtrl.valid && descCtrl.valid"
+  ></Button>
 </FlexboxLayout>
