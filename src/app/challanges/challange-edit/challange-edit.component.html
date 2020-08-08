@@ -5,11 +5,21 @@
 <FlexboxLayout class="form">
   <StackLayout class="input-field">
     <Label class="label" text="Title"></Label>
-    <TextField class="input"></TextField>
+    <TextField
+      ngModel
+      #titleCtrl="ngModel"
+      class="input"
+      returnKeyType="next"
+      required
+    ></TextField>
+    <Label
+      *ngIf="titleCtrl.invalid && titleCtrl.touched"
+      text="Please input title"
+    ></Label>
   </StackLayout>
   <StackLayout class="input-field">
     <Label class="label" text="Description"></Label>
-    <TextField class="input"></TextField>
+    <TextView class="input" returnKeyType="done" required></TextView>
   </StackLayout>
   <Button class="btn btn-primary" text="Save"></Button>
 </FlexboxLayout>

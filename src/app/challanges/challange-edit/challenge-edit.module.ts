@@ -1,4 +1,5 @@
 import { NgModule, NO_ERRORS_SCHEMA } from "@angular/core";
+import { NativeScriptFormsModule } from "@nativescript/angular/forms";
 import { ChallangeEditComponent } from "./challange-edit.component";
 import { NativeScriptCommonModule } from "nativescript-angular/common";
 import { NativeScriptRouterModule } from "nativescript-angular/router";
@@ -9,6 +10,7 @@ import { SharedModule } from "~/app/shared/Shared.module";
     imports: [
         SharedModule,
         NativeScriptCommonModule,
+        NativeScriptFormsModule,
         NativeScriptRouterModule,
         NativeScriptRouterModule.forChild([
             { path: "", component: ChallangeEditComponent },
