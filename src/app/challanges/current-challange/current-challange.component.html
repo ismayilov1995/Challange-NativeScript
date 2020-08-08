@@ -5,7 +5,7 @@
     nsRouterLink="/challenges/replace"
     pageTransition="slideLeft"
   >
-    <Label text="Replace"></Label
+    <Label ios:class="fa p-5" android:class="fa p-10" text="&#xf0fe;"></Label
   ></ActionItem>
   <ActionItem
     ios.position="right"
@@ -13,10 +13,39 @@
     nsRouterLink="/challenges/edit"
     pageTransition="slideLeft"
   >
-    <Label text="Edit"></Label
+    <Label ios:class="fa p-5" android:class="fa p-10" text="&#xf044;"></Label
   ></ActionItem>
 </ns-action-bar>
-<StackLayout>
-  <Label class="title" text="Current Challange"></Label>
-  <Button text="Change Status" (tap)="onChangeStatus()"></Button>
-</StackLayout>
+<ScrollView>
+  <FlexboxLayout class="page">
+    <StackLayout>
+      <Label class="h1 text-center" text="Take a walk everyday"></Label>
+      <Label
+        class="body text-center"
+        text="Walk for at least 20 minutes everyday"
+      ></Label>
+    </StackLayout>
+    <GridLayout
+      class="calendar"
+      rows="auto,*,*,*,*,*,*,*"
+      columns="*,*,*,*,*,*,*"
+    >
+      <Label
+        class="week"
+        *ngFor="let week of weekDays; let i = index"
+        [text]="week"
+        row="0"
+        [col]="i"
+      ></Label>
+      <FlexboxLayout
+        class="day"
+        *ngFor="let day of days; let i = index"
+        [row]="getRow(i, day)"
+        [col]="day.dayInWeek"
+        (tap)="onChangeStatus()"
+      >
+        <Label [text]="day.dayInMonth"></Label>
+      </FlexboxLayout>
+    </GridLayout>
+  </FlexboxLayout>
+</ScrollView>

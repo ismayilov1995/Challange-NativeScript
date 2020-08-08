@@ -1,5 +1,36 @@
-@import "~@nativescript/theme/core";
-@import "~@nativescript/theme/blue";
+@import "~@nativescript/theme/core.compat";
+@import "~@nativescript/theme/blue.compat";
+
+@import "./theme/colors";
+
+@import "~@nativescript/theme/index";
+
+$main-font: "Oswald", "Oswald-Regular", "Oswald-Bold";
+
+ActionBar {
+  background: $primary;
+  color: #fff;
+}
+
+.form {
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  .input-field {
+    width: 80%;
+    .label {
+      margin: 0;
+      color: $primary;
+      font-weight: 400;
+      font-family: $main-font;
+    }
+    .input {
+      border-bottom-width: 2;
+      border-color: $primary;
+      width: 100%;
+    }
+  }
+}
 
 .drawer-content {
   flex-direction: column;
@@ -7,13 +38,30 @@
   justify-content: center;
   padding: 20;
   background: linear-gradient(140deg, #2b0c72, #5c3fa0);
+
+  .btn {
+    width: 80%;
+    font-size: 24;
+    height: 45;
+    color: $primary;
+    background: #fff;
+    border-color: #fff;
+  }
 }
-.btn {
-  color: #fff;
-  height: 30;
-  width: 100%;
+
+.h1 {
+  font-weight: bold;
+  color: $primary;
+  font-family: $main-font;
+}
+
+.btn-flat {
+  color: $primary;
+  background: transparent;
+  border-color: transparent;
   border-width: 1;
-  border-color: #9c1f9c;
-  border-radius: 30%;
-  background-color: #9c1f9c;
+}
+
+.fa {
+  font-family: "FontAwesome", "Font-Awesome";
 }

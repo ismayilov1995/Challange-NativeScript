@@ -1,9 +1,6 @@
 <ns-action-bar title="Today's Challange"></ns-action-bar>
-<StackLayout>
-  <Label text="Today"></Label>
-  <Button
-    text="Current Challange"
-    class="btn btn-primary"
-    nsRouterLink="/challenges/tabs/current-challenge"
-  ></Button>
-</StackLayout>
+<GridLayout>
+  <ns-challange-actions
+    (actionSelect)="onActionSelected($event)"
+  ></ns-challange-actions>
+</GridLayout>

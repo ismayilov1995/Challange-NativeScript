@@ -1,5 +1,6 @@
 <FlexboxLayout>
-  <Label [text]="date | date"></Label>
-  <Button text="Completed" class="btn" (tap)="onHandleInput('complete')"></Button>
-  <Button text="Failed" class="btn" (tap)="onHandleInput('fail')"></Button>
+  <ns-challange-actions
+    (actionSelect)="onHandleInput($event)"
+    cancelText="Reset"
+  ></ns-challange-actions>
 </FlexboxLayout>
