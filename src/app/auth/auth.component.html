@@ -49,6 +49,7 @@
       [autocorrect]="false"
       autocapitalizationType="none"
       [secure]="true"
+      (returnPress)="onSubmit()"
       hint="Min 6 characters"
       formControlName="password"
     ></TextField>

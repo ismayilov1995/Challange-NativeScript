@@ -4,7 +4,6 @@ import {
     FormGroup,
     FormControl,
     Validators,
-    AbstractControl,
 } from "@angular/forms";
 
 @Component({
@@ -31,7 +30,7 @@ export class AuthComponent implements OnInit {
 
     onSubmit(): void {
         if (this.form.invalid) return;
-        this.router.navigate(["/challanges"], { clearHistory: true });
+        this.router.navigate(["/challenges"], { clearHistory: true });
     }
 
     get f() {
