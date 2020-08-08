@@ -25,7 +25,7 @@
         text="Walk for at least 20 minutes everyday"
       ></Label>
     </StackLayout>
-    <GridLayout rows="auto,*,*,*,*,*,*,*" columns="*,*,*,*,*,*,*">
+    <GridLayout class="calendar" rows="auto,*,*,*,*,*,*,*" columns="*,*,*,*,*,*,*">
       <Label
         class="week"
         *ngFor="let week of weekDays; let i = index"
@@ -33,13 +33,14 @@
         row="0"
         [col]="i"
       ></Label>
-      <Label
+      <FlexboxLayout
         class="day"
         *ngFor="let day of days; let i = index"
-        [text]="day.dayInMonth"
         [row]="getRow(i, day)"
         [col]="day.dayInWeek"
-      ></Label>
+      >
+        <Label [text]="day.dayInMonth"></Label>
+      </FlexboxLayout>
     </GridLayout>
   </FlexboxLayout>
 </ScrollView>

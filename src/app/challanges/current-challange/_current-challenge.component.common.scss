@@ -1,19 +1,45 @@
+@import "../../../theme/colors";
+
 .page {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 20;
+  margin: 20 0;
+}
+.calendar {
+  margin: 0 10;
 }
 
-Label {
-  .week {
-    text-align: center;
-    width: 100%;
-  }
-  .day {
-    width: 50;
-    height: 50;
-    border-width: 1;
-    border-color: green;
-  }
+.week {
+  text-align: center;
+  color: $secondary;
+  font-weight: bold;
+  width: 100%;
+  margin: 15 0;
+}
+.day {
+  justify-content: center;
+  align-items: center;
+  margin: 10;
+  width: 50;
+  height: 50;
+  border-width: 1;
+  border-color: $primary;
+  border-radius: 50%;
+  color: $primary;
+}
+
+.completed {
+  color: #fff;
+  background: $success;
+}
+
+.failed {
+  color: #fff;
+  background: $fail;
+}
+
+.not-settable {
+  color: #000;
+  background: $disabled;
 }
