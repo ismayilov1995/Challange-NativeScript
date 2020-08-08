@@ -45,5 +45,6 @@
     class="btn btn-primary"
     text="Save"
     [isEnabled]="titleCtrl.valid && descCtrl.valid"
+    (tap)="onSubmit(titleCtrl.value, descCtrl.value)"
   ></Button>
 </FlexboxLayout>
