@@ -17,7 +17,7 @@
   ></ActionItem>
 </ns-action-bar>
 <ScrollView>
-  <FlexboxLayout class="page">
+  <FlexboxLayout class="page" *ngIf="currentChallenge; else tplNoChallange">
     <StackLayout>
       <Label class="h1 text-center" text="Take a walk everyday"></Label>
       <Label
@@ -39,7 +39,7 @@
       ></Label>
       <FlexboxLayout
         class="day"
-        *ngFor="let day of days; let i = index"
+        *ngFor="let day of currentChallenge.days; let i = index"
         [row]="getRow(i, day)"
         [col]="day.dayInWeek"
         (tap)="onChangeStatus()"
@@ -49,3 +49,14 @@
     </GridLayout>
   </FlexboxLayout>
 </ScrollView>
+
+<ng-template #tplNoChallange>
+  <FlexboxLayout class="page">
+    <Label text="No challenge found"></Label>
+    <Button
+      class="btn btn-primary"
+      text="Create One"
+      nsRouterLink="/challenges/replace"
+    ></Button>
+  </FlexboxLayout>
+</ng-template>

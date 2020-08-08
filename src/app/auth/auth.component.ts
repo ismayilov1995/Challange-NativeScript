@@ -26,12 +26,13 @@ export class AuthComponent implements OnInit {
     }
 
     onSubmit(): void {
-        if (this.form.invalid) return;
+        if (this.form.valid) return;
         if (this.isLogin) {
             this.form.reset();
             this.router.navigate(["/challenges"], { clearHistory: true });
         } else {
             console.log("Registration");
+            this.router.navigate(["/challenges"], { clearHistory: true });
         }
     }
 

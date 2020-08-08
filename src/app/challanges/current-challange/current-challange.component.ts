@@ -1,7 +1,11 @@
-import { Component, OnInit, ViewContainerRef } from "@angular/core";
+import { Component, OnInit, ViewContainerRef, OnDestroy } from "@angular/core";
 import { ModalDialogService } from "nativescript-angular/common";
 import { DayModalComponent } from "../day-modal/day-modal.component";
 import { UIService } from "~/app/shared/ui/ui.service";
+import { ChallengeService } from "../challenge.service";
+import { Challenge } from "../challenge.model";
+import { Subject } from "rxjs";
+import { takeUntil } from "rxjs/operators";
 
 @Component({
     selector: "ns-current-challange",
@@ -11,19 +15,25 @@ import { UIService } from "~/app/shared/ui/ui.service";
         "current-challenge.component.scss",
     ],
 })
-export class CurrentChallangeComponent implements OnInit {
+export class CurrentChallangeComponent implements OnInit, OnDestroy {
     weekDays = ["S", "M", "T", "W", "T", "F", "S"];
-    days: { dayInMonth: number; dayInWeek: number }[] = [];
+    currentChallenge: Challenge;
     private curYear: number;
     private curMonth: number;
+    private subs = new Subject();
     constructor(
         private uiService: UIService,
         private vcRef: ViewContainerRef,
-        private modalDialog: ModalDialogService
+        private modalDialog: ModalDialogService,
+        private challengeService: ChallengeService
     ) {}
 
     ngOnInit(): void {
-
+        this.challengeService.currentChallenge
+            .pipe(takeUntil(this.subs))
+            .subscribe((challenge) => {
+                this.currentChallenge = challenge;
+            });
     }
 
     getRow(
@@ -53,5 +63,9 @@ export class CurrentChallangeComponent implements OnInit {
             .then((res: string) => {
                 console.log(res);
             });
+    }
+
+    ngOnDestroy(): void {
+        this.subs.next();
     }
 }
