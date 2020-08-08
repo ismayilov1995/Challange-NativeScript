@@ -7,8 +7,8 @@ import { UIService } from "~/app/shared/ui/ui.service";
     selector: "ns-current-challange",
     templateUrl: "current-challange.component.html",
     styleUrls: [
-        'current-challenge.component.common.css',
-        'current-challenge.component.css'
+        '_current-challenge.component.common.scss',
+        'current-challenge.component.scss'
       ],
 })
 export class CurrentChallangeComponent implements OnInit {

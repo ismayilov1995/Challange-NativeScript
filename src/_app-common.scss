@@ -37,6 +37,11 @@ ActionBar {
   background: linear-gradient(140deg, #2b0c72, #5c3fa0);
 }
 
+.h1 {
+  font-weight: bold;
+  color: $primary;
+}
+
 .btn-flat {
   color: $primary;
   background: transparent;
