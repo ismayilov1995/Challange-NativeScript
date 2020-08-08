@@ -23,18 +23,7 @@ export class CurrentChallangeComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        this.curYear = new Date().getFullYear();
-        this.curMonth = new Date().getMonth();
-        const daysInMonth = new Date(
-            this.curYear,
-            this.curMonth + 1,
-            0
-        ).getDate();
-        for (let i = 1; i < daysInMonth + 1; i++) {
-            const date = new Date(this.curYear, this.curMonth, i);
-            const dayInWeek = date.getDay();
-            this.days.push({ dayInMonth: i, dayInWeek: dayInWeek });
-        }
+
     }
 
     getRow(
