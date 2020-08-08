@@ -11,12 +11,14 @@ import { AppRoutingModule } from "./app-routing.module";
 import { DayModalComponent } from "./challanges/day-modal/day-modal.component";
 import { SharedModule } from "./shared/Shared.module";
 import { ChallangeActionsModule } from "./challanges/challange-actions/challanges-actions.module";
+import { ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
     bootstrap: [AppComponent],
     imports: [
         NativeScriptModule,
         NativeScriptFormsModule,
+        ReactiveFormsModule,
         NativeScriptUISideDrawerModule,
         AppRoutingModule,
         SharedModule,
