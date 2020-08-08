@@ -24,17 +24,17 @@ export class AuthComponent implements OnInit {
                 validators: [Validators.required, Validators.email],
             }),
             password: new FormControl(null, {
-                updateOn: "blur",
                 validators: [Validators.required, Validators.minLength(6)],
             }),
         });
     }
 
-    onSignin(): void {
-        this.router.navigate(["/today"], { clearHistory: true });
+    onSubmit(): void {
+        if (this.form.invalid) return;
+        this.router.navigate(["/challanges"], { clearHistory: true });
     }
 
-    get f(): any {
+    get f() {
         return this.form.controls;
     }
 }

@@ -24,13 +24,17 @@ ActionBar {
       font-weight: 400;
       font-family: $main-font;
     }
+    .input {
+      border-bottom-width: 2;
+      border-bottom-color: $primary;
+      width: 100%;
+    }
     .invalid {
       color: $fail;
     }
-    .input {
-      border-bottom-width: 2;
-      border-color: $primary;
-      width: 100%;
+    .ng-invalid.ng-touched {
+      color: $fail;
+      border-bottom-color: $fail;
     }
   }
 }
@@ -67,9 +71,4 @@ ActionBar {
 
 .fa {
   font-family: "FontAwesome", "Font-Awesome";
-}
-
-.ng-invalid.ng-touched {
-  color: $fail;
-  border-bottom-color: $fail;
 }
