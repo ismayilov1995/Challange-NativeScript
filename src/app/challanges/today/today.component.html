@@ -1,2 +1,6 @@
 <ns-action-bar title="Today's Challange"></ns-action-bar>
-<ns-challange-actions (actionSelect)="onActionSelected($event)"></ns-challange-actions>
+<GridLayout>
+  <ns-challange-actions
+    (actionSelect)="onActionSelected($event)"
+  ></ns-challange-actions>
+</GridLayout>
