@@ -1,17 +1,14 @@
 import { Injectable } from "@angular/core";
-import { BehaviorSubject } from "rxjs";
+import { BehaviorSubject, Observable } from "rxjs";
 import { Challenge } from "./challenge.model";
-import { Observable } from "tns-core-modules/ui/page";
 
-@Injectable({
-    providedIn: "root",
-})
+@Injectable({ providedIn: "root" })
 export class ChallengeService {
     private _currentChallenge = new BehaviorSubject<Challenge>(null);
 
     constructor() {}
 
-    get currentChallenge() {
+    get currentChallenge(): Observable<Challenge> {
         return this._currentChallenge.asObservable();
     }
 

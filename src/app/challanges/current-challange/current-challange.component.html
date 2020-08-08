@@ -17,18 +17,28 @@
   ></ActionItem>
 </ns-action-bar>
 <ScrollView>
-  <FlexboxLayout class="page" *ngIf="currentChallenge; else tplNoChallange">
-    <StackLayout>
-      <Label class="h1 text-center" text="Take a walk everyday"></Label>
+  <FlexboxLayout class="page">
+    <StackLayout *ngIf="!currentChallenge">
+      <Label text="No challenge found!"></Label>
+      <Button
+        class="btn btn-primary"
+        text="Create One!"
+        nsRouterLink="/challenges/replace"
+        pageTransition="slideLeft"
+      ></Button>
+    </StackLayout>
+    <StackLayout *ngIf="currentChallenge">
+      <Label class="h1 text-center" [text]="currentChallenge.title"></Label>
       <Label
         class="body text-center"
-        text="Walk for at least 20 minutes everyday"
+        [text]="currentChallenge.description"
       ></Label>
     </StackLayout>
     <GridLayout
       class="calendar"
       rows="auto,*,*,*,*,*,*,*"
       columns="*,*,*,*,*,*,*"
+      *ngIf="currentChallenge"
     >
       <Label
         class="week"
@@ -49,14 +59,3 @@
     </GridLayout>
   </FlexboxLayout>
 </ScrollView>
-
-<ng-template #tplNoChallange>
-  <FlexboxLayout class="page">
-    <Label text="No challenge found"></Label>
-    <Button
-      class="btn btn-primary"
-      text="Create One"
-      nsRouterLink="/challenges/replace"
-    ></Button>
-  </FlexboxLayout>
-</ng-template>

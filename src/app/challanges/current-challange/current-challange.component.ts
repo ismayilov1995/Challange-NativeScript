@@ -18,9 +18,8 @@ import { takeUntil } from "rxjs/operators";
 export class CurrentChallangeComponent implements OnInit, OnDestroy {
     weekDays = ["S", "M", "T", "W", "T", "F", "S"];
     currentChallenge: Challenge;
-    private curYear: number;
-    private curMonth: number;
     private subs = new Subject();
+
     constructor(
         private uiService: UIService,
         private vcRef: ViewContainerRef,
@@ -33,6 +32,7 @@ export class CurrentChallangeComponent implements OnInit, OnDestroy {
             .pipe(takeUntil(this.subs))
             .subscribe((challenge) => {
                 this.currentChallenge = challenge;
+                console.log(this.currentChallenge);
             });
     }
 
@@ -43,8 +43,8 @@ export class CurrentChallangeComponent implements OnInit, OnDestroy {
         const startRow = 1;
         const weekRow = Math.floor(index / 7);
         const firstWeekDayOfMonth = new Date(
-            this.curYear,
-            this.curMonth,
+            new Date().getFullYear(),
+            new Date().getMonth(),
             1
         ).getDay();
         const irregularRow = day.dayInWeek < firstWeekDayOfMonth ? 1 : 0;
