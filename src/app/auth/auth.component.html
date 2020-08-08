@@ -1,5 +1,5 @@
 <ns-action-bar
-  title="Login"
+  [title]="isLogin ? 'Login' : 'Signup'"
   [showBackButton]="false"
   [hasMenu]="false"
 ></ns-action-bar>
@@ -62,8 +62,13 @@
       "
     ></Label>
   </StackLayout>
+  <Label
+    class="btn-flat"
+    [text]="isLogin ? 'Signup instead' : 'Login instead'"
+    (tap)="onSwitch()"
+  ></Label>
   <Button
-    text="Login"
+    [text]="isLogin ? 'Login' : 'Signup'"
     class="btn btn-primary btn-rounded-lg"
     [isEnabled]="form.valid"
     (tap)="onSubmit()"

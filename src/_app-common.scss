@@ -64,9 +64,11 @@ ActionBar {
 
 .btn-flat {
   color: $primary;
+  text-align: center;
   background: transparent;
   border-color: transparent;
   border-width: 1;
+  font-size: 16;
 }
 
 .fa {
