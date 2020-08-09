@@ -9,6 +9,7 @@ import { DayStatus } from "../day.model";
 export class ChallangeActionsComponent implements OnInit {
     @Output() actionSelect = new EventEmitter<DayStatus>();
     @Input() cancelText: string = "Cancel";
+    action: "complete" | "fail" = null;
 
     constructor() {}
 
@@ -16,10 +17,13 @@ export class ChallangeActionsComponent implements OnInit {
 
     inAction(action: "complete" | "fail" | "cancel"): void {
         let status = DayStatus.Open;
+        this.action = null;
         if (action === "complete") {
             status = DayStatus.Completed;
+            this.action = action;
         } else if (action === "fail") {
             status = DayStatus.Failed;
+            this.action = action;
         }
         this.actionSelect.emit(status);
     }

@@ -4,6 +4,7 @@ import { NativeScriptCommonModule } from "nativescript-angular/common";
 
 @NgModule({
     declarations: [ChallangeActionsComponent],
+    imports: [NativeScriptCommonModule],
     exports: [ChallangeActionsComponent],
     schemas: [NO_ERRORS_SCHEMA],
 })
