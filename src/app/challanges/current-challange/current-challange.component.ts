@@ -6,6 +6,7 @@ import { ChallengeService } from "../challenge.service";
 import { Challenge } from "../challenge.model";
 import { Subject } from "rxjs";
 import { takeUntil } from "rxjs/operators";
+import { RouterExtensions } from "nativescript-angular/router";
 
 @Component({
     selector: "ns-current-challange",
@@ -24,7 +25,8 @@ export class CurrentChallangeComponent implements OnInit, OnDestroy {
         private uiService: UIService,
         private vcRef: ViewContainerRef,
         private modalDialog: ModalDialogService,
-        private challengeService: ChallengeService
+        private challengeService: ChallengeService,
+        private router: RouterExtensions
     ) {}
 
     ngOnInit(): void {
@@ -34,6 +36,10 @@ export class CurrentChallangeComponent implements OnInit, OnDestroy {
                 this.currentChallenge = challenge;
                 console.log(this.currentChallenge);
             });
+    }
+
+    onBack() {
+        this.router.backToPreviousPage();
     }
 
     getRow(

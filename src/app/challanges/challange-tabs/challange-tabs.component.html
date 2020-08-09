@@ -1,10 +1,35 @@
 <TabView androidTabsPosition="bottom">
   <StackLayout *tabItem="{ title: 'Today', iconSource: 'res://check' }">
-    <page-router-outlet name="today"> </page-router-outlet>
+    <ns-action-bar title="Today's Challange"></ns-action-bar>
+    <router-outlet name="today"> </router-outlet>
   </StackLayout>
   <StackLayout
     *tabItem="{ title: 'Current Challenge', iconSource: 'res://trophy' }"
   >
-    <page-router-outlet name="currentChallenge"> </page-router-outlet>
+    <ns-action-bar title="Current Challenge" [showBackButton]="false">
+      <ActionItem
+        ios.position="right"
+        android.position="actionBar"
+        nsRouterLink="/challenges/replace"
+      >
+        <Label
+          ios:class="fa p-5"
+          android:class="fa p-10"
+          text="&#xf0fe;"
+        ></Label
+      ></ActionItem>
+      <ActionItem
+        ios.position="right"
+        android.position="actionBar"
+        nsRouterLink="/challenges/edit"
+      >
+        <Label
+          ios:class="fa p-5"
+          android:class="fa p-10"
+          text="&#xf044;"
+        ></Label
+      ></ActionItem>
+    </ns-action-bar>
+    <router-outlet name="currentChallenge"> </router-outlet>
   </StackLayout>
 </TabView>
