@@ -2,6 +2,7 @@
   <Label class="h1" [text]="date | date"></Label>
   <ns-challange-actions
     (actionSelect)="onHandleInput($event)"
-    cancelText="Reset"
+    [choosen]="status"
+    cancelText="Cancel"
   ></ns-challange-actions>
 </FlexboxLayout>
