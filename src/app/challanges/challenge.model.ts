@@ -6,7 +6,7 @@ export class Challenge {
         public description: string,
         public year: number,
         public month: number,
-        private _days: Day[] = []
+        public _days: Day[] = []
     ) {
         if (_days.length > 0) return;
         // this.curYear = new Date().getFullYear();

@@ -1,28 +1,50 @@
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, Observable } from "rxjs";
+import { BehaviorSubject, Observable, of } from "rxjs";
 import { Challenge } from "./challenge.model";
 import { DayStatus } from "./day.model";
-import { last, take } from "rxjs/operators";
+import { take, tap, map, catchError, mapTo } from "rxjs/operators";
+import { HttpClient } from "@angular/common/http";
 
 @Injectable({ providedIn: "root" })
 export class ChallengeService {
+    private url =
+        "https://challenge-nativescript.firebaseio.com/challenge.json";
     private _currentChallenge = new BehaviorSubject<Challenge>(null);
 
-    constructor() {}
+    constructor(private http: HttpClient) {}
 
     get currentChallenge(): Observable<Challenge> {
         return this._currentChallenge.asObservable();
     }
 
+    fetchChallenges() {
+        return this.http.get<Challenge>(this.url).pipe(
+            tap((resData) => {
+                if (resData) {
+                    const loadedChallenge = new Challenge(
+                        resData.title,
+                        resData.description,
+                        resData.year,
+                        resData.month,
+                        resData._days
+                      );
+                      this._currentChallenge.next(loadedChallenge);
+                }
+            }),
+            mapTo(true),
+            catchError((error) => of(false))
+        );
+    }
+
     createNewChallange(title: string, description: string) {
-        const challange = new Challenge(
+        const challenge = new Challenge(
             title,
             description,
             new Date().getFullYear(),
             new Date().getMonth()
         );
-        // Save it to server
-        this._currentChallenge.next(challange);
+        this._currentChallenge.next(challenge);
+        this.saveToServer(challenge);
     }
 
     updateChallange(title: string, description: string) {
@@ -30,8 +52,8 @@ export class ChallengeService {
             challenge.title = title;
             challenge.description = description;
             this._currentChallenge.next(challenge);
+            this.saveToServer(challenge);
         });
-        // Save it to server
     }
 
     updateDayStatus(dayInMonth: number, status: DayStatus) {
@@ -44,6 +66,13 @@ export class ChallengeService {
             );
             challenge.days[dayIndex].status = status;
             this._currentChallenge.next(challenge);
+            this.saveToServer(challenge);
+        });
+    }
+
+    private saveToServer(challenge: Challenge) {
+        this.http.put(this.url, challenge).subscribe((res) => {
+            console.log("Updated");
         });
     }
 }
