@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, Observable } from "rxjs";
+import { BehaviorSubject, Observable, of } from "rxjs";
 import { Challenge } from "./challenge.model";
 import { DayStatus } from "./day.model";
-import { take, tap } from "rxjs/operators";
+import { take, tap, map, catchError, mapTo } from "rxjs/operators";
 import { HttpClient } from "@angular/common/http";
 
 @Injectable({ providedIn: "root" })
@@ -18,11 +18,21 @@ export class ChallengeService {
     }
 
     fetchChallenges() {
-        console.log("yogamina");
         return this.http.get<Challenge>(this.url).pipe(
             tap((res) => {
-                console.log("res", res);
-            })
+                if (res) {
+                    const newData = new Challenge(
+                        res.title,
+                        res.description,
+                        res.year,
+                        res.month,
+                        res.days
+                    );
+                    this._currentChallenge.next(newData);
+                }
+            }),
+            mapTo(true),
+            catchError((error) => of(false))
         );
     }
 

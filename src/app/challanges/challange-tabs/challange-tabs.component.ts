@@ -27,17 +27,9 @@ export class ChallangeTabsComponent implements OnInit {
     }
 
     getChallenges() {
-        this.challengeService.fetchChallenges().subscribe(
-            (challenge) => {
-                this.isLoading = false;
-                console.log("challenge");
-                console.log(challenge);
-            },
-            (error) => {
-                this.isLoading = false;
-                console.log(error);
-            }
-        );
+        this.challengeService.fetchChallenges().subscribe(() => {
+            this.isLoading = false;
+        });
     }
 
     loadTabRoutes() {
