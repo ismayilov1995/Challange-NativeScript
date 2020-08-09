@@ -4,12 +4,14 @@
     (tap)="inAction('complete')"
     text="Completed"
     *ngIf="action !== 'complete'; else tplComplete"
+    [isEnabled]="!done"
   ></Button>
   <Button
     class="btn btn-fail btn-rounded-lg"
     text="Failed"
     (tap)="inAction('fail')"
     *ngIf="action !== 'fail'; else tplComplete"
+    [isEnabled]="!done"
   ></Button>
   <Label
     class="btn-flat m-t-10"

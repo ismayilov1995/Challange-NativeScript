@@ -11,5 +11,6 @@
   <Label class="h1" [text]="currentDay.date | date"></Label>
   <ns-challange-actions
     (actionSelect)="onActionSelected($event)"
+    [choosen]="getActionName()"
   ></ns-challange-actions>
 </FlexboxLayout>
