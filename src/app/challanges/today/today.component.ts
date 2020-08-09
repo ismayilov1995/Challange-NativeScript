@@ -18,7 +18,6 @@ export class TodayComponent implements OnInit, OnDestroy {
             (challenge) => {
                 if (challenge) {
                     this.currentDay = challenge.currentDay;
-                    console.log(this.currentDay);
                 }
             }
         );
