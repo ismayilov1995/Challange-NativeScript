@@ -1,3 +1,20 @@
+<ns-action-bar title="Current Challenge" [showBackButton]="false">
+  <ActionItem
+    ios.position="right"
+    android.position="actionBar"
+    nsRouterLink="/challenges/replace"
+  >
+    <Label ios:class="fa p-5" android:class="fa p-10" text="&#xf0fe;"></Label
+  ></ActionItem>
+  <ActionItem
+    ios.position="right"
+    android.position="actionBar"
+    nsRouterLink="/challenges/edit"
+    *ngIf="currentChallenge"
+  >
+    <Label ios:class="fa p-5" android:class="fa p-10" text="&#xf044;"></Label
+  ></ActionItem>
+</ns-action-bar>
 <ScrollView>
   <FlexboxLayout class="page">
     <StackLayout *ngIf="!currentChallenge">
