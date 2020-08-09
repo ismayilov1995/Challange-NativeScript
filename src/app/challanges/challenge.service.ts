@@ -19,16 +19,16 @@ export class ChallengeService {
 
     fetchChallenges() {
         return this.http.get<Challenge>(this.url).pipe(
-            tap((res) => {
-                if (res) {
-                    const newData = new Challenge(
-                        res.title,
-                        res.description,
-                        res.year,
-                        res.month,
-                        res.days
-                    );
-                    this._currentChallenge.next(newData);
+            tap((resData) => {
+                if (resData) {
+                    const loadedChallenge = new Challenge(
+                        resData.title,
+                        resData.description,
+                        resData.year,
+                        resData.month,
+                        resData._days
+                      );
+                      this._currentChallenge.next(loadedChallenge);
                 }
             }),
             mapTo(true),
@@ -72,7 +72,7 @@ export class ChallengeService {
 
     private saveToServer(challenge: Challenge) {
         this.http.put(this.url, challenge).subscribe((res) => {
-            console.log(res);
+            console.log("Updated");
         });
     }
 }

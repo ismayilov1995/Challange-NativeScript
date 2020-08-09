@@ -6,7 +6,7 @@
         <item name="toolbarStyle">@style/NativeScriptToolbarStyle</item>
 
         <item name="colorPrimary">@color/ns_primary</item>
-        <item name="colorPrimaryDark">@color/ns_primaryDark</item>
+        <item name="colorPrimaryDark">@color/ns_primary</item>
         <item name="colorAccent">@color/ns_accent</item>
 
         <item name="android:windowBackground">@drawable/splash_screen</item>
@@ -23,7 +23,7 @@
         <item name="toolbarStyle">@style/NativeScriptToolbarStyle</item>
 
         <item name="colorPrimary">@color/ns_primary</item>
-        <item name="colorPrimaryDark">@color/ns_primaryDark</item>
+        <item name="colorPrimaryDark">@color/ns_primary</item>
         <item name="colorAccent">@color/ns_accent</item>
     </style>
 
