@@ -4,6 +4,7 @@ import {
     NativeScriptFormsModule,
 } from "@nativescript/angular";
 import { NativeScriptUISideDrawerModule } from "nativescript-ui-sidedrawer/angular";
+import { NativeScriptHttpClientModule } from "nativescript-angular/http-client";
 
 import { AppComponent } from "./app.component";
 import { AuthComponent } from "./auth/auth.component";
@@ -19,6 +20,8 @@ import { ReactiveFormsModule } from "@angular/forms";
         NativeScriptModule,
         NativeScriptFormsModule,
         ReactiveFormsModule,
+        NativeScriptFormsModule,
+        NativeScriptHttpClientModule,
         NativeScriptUISideDrawerModule,
         AppRoutingModule,
         SharedModule,

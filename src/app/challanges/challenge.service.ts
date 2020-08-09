@@ -2,27 +2,32 @@ import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable } from "rxjs";
 import { Challenge } from "./challenge.model";
 import { DayStatus } from "./day.model";
-import { last, take } from "rxjs/operators";
+import { take } from "rxjs/operators";
+import { HttpClient } from "@angular/common/http";
 
 @Injectable({ providedIn: "root" })
 export class ChallengeService {
+    private url =
+        "https://challenge-nativescript.firebaseio.com/challenge.json";
     private _currentChallenge = new BehaviorSubject<Challenge>(null);
 
-    constructor() {}
+    constructor(private http: HttpClient) {}
 
     get currentChallenge(): Observable<Challenge> {
         return this._currentChallenge.asObservable();
     }
 
     createNewChallange(title: string, description: string) {
-        const challange = new Challenge(
+        const challenge = new Challenge(
             title,
             description,
             new Date().getFullYear(),
             new Date().getMonth()
         );
-        // Save it to server
-        this._currentChallenge.next(challange);
+        this._currentChallenge.next(challenge);
+        this.http.put(this.url, challenge).subscribe((res) => {
+            console.log(res);
+        });
     }
 
     updateChallange(title: string, description: string) {
