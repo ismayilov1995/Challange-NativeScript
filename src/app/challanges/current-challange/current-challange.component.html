@@ -3,7 +3,6 @@
     ios.position="right"
     android.position="actionBar"
     nsRouterLink="/challenges/replace"
-    pageTransition="slideLeft"
   >
     <Label ios:class="fa p-5" android:class="fa p-10" text="&#xf0fe;"></Label
   ></ActionItem>
@@ -11,24 +10,34 @@
     ios.position="right"
     android.position="actionBar"
     nsRouterLink="/challenges/edit"
-    pageTransition="slideLeft"
+    *ngIf="currentChallenge"
   >
     <Label ios:class="fa p-5" android:class="fa p-10" text="&#xf044;"></Label
   ></ActionItem>
 </ns-action-bar>
 <ScrollView>
   <FlexboxLayout class="page">
-    <StackLayout>
-      <Label class="h1 text-center" text="Take a walk everyday"></Label>
+    <StackLayout *ngIf="!currentChallenge">
+      <Label text="No challenge found!"></Label>
+      <Button
+        class="btn btn-primary"
+        text="Create One!"
+        nsRouterLink="/challenges/replace"
+        pageTransition="slideLeft"
+      ></Button>
+    </StackLayout>
+    <StackLayout *ngIf="currentChallenge">
+      <Label class="h1 text-center" [text]="currentChallenge.title"></Label>
       <Label
         class="body text-center"
-        text="Walk for at least 20 minutes everyday"
+        [text]="currentChallenge.description"
       ></Label>
     </StackLayout>
     <GridLayout
       class="calendar"
       rows="auto,*,*,*,*,*,*,*"
       columns="*,*,*,*,*,*,*"
+      *ngIf="currentChallenge"
     >
       <Label
         class="week"
@@ -38,11 +47,16 @@
         [col]="i"
       ></Label>
       <FlexboxLayout
+        *ngFor="let day of currentChallenge.days; let i = index"
         class="day"
-        *ngFor="let day of days; let i = index"
+        [ngClass]="{
+          'not-settable': !getIsSettable(day.dayInMonth),
+          completed: day.status === 1,
+          failed: day.status === 2
+        }"
         [row]="getRow(i, day)"
         [col]="day.dayInWeek"
-        (tap)="onChangeStatus()"
+        (tap)="onChangeStatus(day)"
       >
         <Label [text]="day.dayInMonth"></Label>
       </FlexboxLayout>

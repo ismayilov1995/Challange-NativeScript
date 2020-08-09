@@ -1,5 +1,35 @@
 <FlexboxLayout>
-  <Button class="btn btn-success btn-rounded-lg" text="Completed" (tap)="inAction('complete')"></Button>
-  <Button class="btn btn-fail btn-rounded-lg" text="Failed" (tap)="inAction('fail')"></Button>
-  <Label class="btn-flat m-t-10" [text]="cancelText" (tap)="inAction('cancel')"></Label>
+  <Button
+    class="btn btn-success btn-rounded-lg"
+    (tap)="inAction('complete')"
+    text="Completed"
+    *ngIf="action !== 'complete'; else tplComplete"
+    [isEnabled]="!done"
+  ></Button>
+  <Button
+    class="btn btn-fail btn-rounded-lg"
+    text="Failed"
+    (tap)="inAction('fail')"
+    *ngIf="action !== 'fail'; else tplComplete"
+    [isEnabled]="!done"
+  ></Button>
+  <Label
+    class="btn-flat m-t-10"
+    [text]="cancelText"
+    (tap)="inAction('cancel')"
+  ></Label>
 </FlexboxLayout>
+
+<ng-template #tplComplete>
+  <StackLayout
+    class="btn btn-rounded-lg"
+    [class.btn-fail]="action === 'fail'"
+    [class.btn-success]="action === 'complete'"
+  >
+    <Label
+      class="fa btn-alt animated-btn"
+      [text]="action === 'fail' ? '&#xf00d;' : '&#xf00c;'"
+      horizontalAlignment="center"
+    ></Label>
+  </StackLayout>
+</ng-template>

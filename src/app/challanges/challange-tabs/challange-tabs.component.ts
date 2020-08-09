@@ -6,16 +6,19 @@ import { Page } from "tns-core-modules/ui/page";
 @Component({
     selector: "ns-challange-tabs",
     templateUrl: "./challange-tabs.component.html",
-    styleUrls: ["./challange-tabs.component.css", "./challange-tabs.component.common.css"],
+    styleUrls: [
+        "./challange-tabs.component.css",
+        "./challange-tabs.component.common.css",
+    ],
 })
 export class ChallangeTabsComponent implements OnInit {
     constructor(
         private router: RouterExtensions,
-        private route: ActivatedRoute,
+        private active: ActivatedRoute,
         private page: Page
     ) {}
 
-    ngOnInit(): void {
+    ngOnInit() {
         this.router.navigate(
             [
                 {
@@ -25,8 +28,10 @@ export class ChallangeTabsComponent implements OnInit {
                     },
                 },
             ],
-            { relativeTo: this.route }
+            {
+                relativeTo: this.active
+            }
         );
-        this.page.actionBarHidden = true;
+        // this.page.actionBarHidden = true;
     }
 }

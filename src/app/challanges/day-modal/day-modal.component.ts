@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { ModalDialogParams } from "nativescript-angular/common";
+import { DayStatus } from "../day.model";
 
 @Component({
     selector: "ns-day-modal",
@@ -8,13 +9,27 @@ import { ModalDialogParams } from "nativescript-angular/common";
 })
 export class DayModalComponent implements OnInit {
     date: Date;
+    status: "complete" | "fail" = null;
     constructor(private modalParams: ModalDialogParams) {}
 
     ngOnInit(): void {
-        this.date = (this.modalParams.context as { date: Date }).date;
+        const contex = this.modalParams.context as {
+            date: Date;
+            status: DayStatus;
+        };
+        this.date = contex.date;
+        switch (contex.status) {
+            case DayStatus.Completed:
+                this.status = "complete";
+            case DayStatus.Failed:
+                this.status = "fail";
+            default:
+                this.status = null;
+                return;
+        }
     }
 
-    onHandleInput(action: "complete" | "fail" | "cancel"): void {
+    onHandleInput(action: DayStatus): void {
         this.modalParams.closeCallback(action);
     }
 }

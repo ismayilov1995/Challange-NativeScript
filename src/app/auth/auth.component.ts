@@ -10,7 +10,6 @@ import { FormGroup, FormControl, Validators } from "@angular/forms";
 export class AuthComponent implements OnInit {
     form: FormGroup;
     isLogin = true;
-    authCredential = { email: "e@e.com", password: "123456" };
 
     constructor(private router: RouterExtensions) {}
 
@@ -27,18 +26,13 @@ export class AuthComponent implements OnInit {
     }
 
     onSubmit(): void {
-        if (this.form.invalid) return;
+        if (this.form.valid) return;
         if (this.isLogin) {
-            if (
-                this.form.value.email === this.authCredential.email &&
-                this.form.controls.password.value ===
-                    this.authCredential.password
-            ) {
-                this.form.reset();
-                this.router.navigate(["/challenges"], { clearHistory: true });
-            }
+            this.form.reset();
+            this.router.navigate(["/challenges"], { clearHistory: true });
         } else {
             console.log("Registration");
+            this.router.navigate(["/challenges"], { clearHistory: true });
         }
     }
 
