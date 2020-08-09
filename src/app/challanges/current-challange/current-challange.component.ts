@@ -34,7 +34,6 @@ export class CurrentChallangeComponent implements OnInit, OnDestroy {
             .pipe(takeUntil(this.subs))
             .subscribe((challenge) => {
                 this.currentChallenge = challenge;
-                console.log(this.currentChallenge);
             });
     }
 

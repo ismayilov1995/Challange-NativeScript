@@ -35,6 +35,7 @@ export class ChallengeService {
             );
             challenge.days[dayIndex].status = status;
             this._currentChallenge.next(challenge);
+
         });
     }
 }
