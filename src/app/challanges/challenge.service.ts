@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable } from "rxjs";
 import { Challenge } from "./challenge.model";
 import { DayStatus } from "./day.model";
-import { take } from "rxjs/operators";
+import { take, tap } from "rxjs/operators";
 import { HttpClient } from "@angular/common/http";
 
 @Injectable({ providedIn: "root" })
@@ -15,6 +15,15 @@ export class ChallengeService {
 
     get currentChallenge(): Observable<Challenge> {
         return this._currentChallenge.asObservable();
+    }
+
+    fetchChallenges() {
+        console.log("yogamina");
+        return this.http.get<Challenge>(this.url).pipe(
+            tap((res) => {
+                console.log("res", res);
+            })
+        );
     }
 
     createNewChallange(title: string, description: string) {
