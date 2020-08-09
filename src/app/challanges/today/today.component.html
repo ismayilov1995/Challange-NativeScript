@@ -1,5 +1,15 @@
-<GridLayout>
+<FlexboxLayout class="page" *ngIf="!currentDay">
+  <Label text="No challenge found!"></Label>
+  <Button
+    class="btn btn-primary"
+    text="Create One!"
+    nsRouterLink="/challenges/replace"
+    pageTransition="slideLeft"
+  ></Button>
+</FlexboxLayout>
+<FlexboxLayout class="page" *ngIf="currentDay">
+  <Label class="h1" [text]="currentDay.date | date"></Label>
   <ns-challange-actions
-  (actionSelect)="onActionSelected($event)"
+    (actionSelect)="onActionSelected($event)"
   ></ns-challange-actions>
-</GridLayout>
+</FlexboxLayout>
