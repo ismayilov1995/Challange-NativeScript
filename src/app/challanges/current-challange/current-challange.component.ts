@@ -7,6 +7,7 @@ import { Challenge } from "../challenge.model";
 import { Subject } from "rxjs";
 import { takeUntil } from "rxjs/operators";
 import { RouterExtensions } from "nativescript-angular/router";
+import { Day, DayStatus } from "../day.model";
 
 @Component({
     selector: "ns-current-challange",
@@ -56,17 +57,22 @@ export class CurrentChallangeComponent implements OnInit, OnDestroy {
         return startRow + weekRow + irregularRow;
     }
 
-    onChangeStatus() {
+    getIsSettable(dayInMonth: number) {
+        return dayInMonth <= new Date().getDate();
+    }
+
+    onChangeStatus(day: Day) {
+        if (!this.getIsSettable(day.dayInMonth)) return;
         this.modalDialog
             .showModal(DayModalComponent, {
                 fullscreen: true,
                 viewContainerRef: this.uiService.getRootVCRef()
                     ? this.uiService.getRootVCRef()
                     : this.vcRef,
-                context: { date: new Date() },
+                context: { date: day.date },
             })
-            .then((res: string) => {
-                console.log(res);
+            .then((status: DayStatus) => {
+                this.challengeService.updateDayStatus(day.dayInMonth, status);
             });
     }
 
