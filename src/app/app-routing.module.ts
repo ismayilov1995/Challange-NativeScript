@@ -17,7 +17,7 @@ const routes: Routes = [
                 (mod) => mod.ChallangesModule
             ),
     },
-    { path: "", redirectTo: "challenges", pathMatch: "full" },
+    { path: "", redirectTo: "/challenges/tabs", pathMatch: "full" },
 ];
 
 @NgModule({
