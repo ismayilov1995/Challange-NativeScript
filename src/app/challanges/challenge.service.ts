@@ -1,24 +1,40 @@
-import { Injectable } from "@angular/core";
-import { BehaviorSubject, Observable, of } from "rxjs";
+import { Injectable, OnDestroy } from "@angular/core";
+import { BehaviorSubject, Observable, of, Subscription } from "rxjs";
 import { Challenge } from "./challenge.model";
 import { DayStatus } from "./day.model";
-import { take, tap, map, catchError, mapTo } from "rxjs/operators";
+import { take, tap, map, catchError, mapTo, switchMap } from "rxjs/operators";
 import { HttpClient } from "@angular/common/http";
+import { AuthService } from "../auth/auth.service";
 
 @Injectable({ providedIn: "root" })
-export class ChallengeService {
-    private url =
-        "https://challenge-nativescript.firebaseio.com/challenge.json";
+export class ChallengeService implements OnDestroy {
     private _currentChallenge = new BehaviorSubject<Challenge>(null);
+    private userSub: Subscription;
 
-    constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient, private authService: AuthService) {
+        this.userSub = authService.user.subscribe((user) => {
+            if (!user) {
+                this._currentChallenge.next(null);
+            }
+        });
+    }
+
+    ngOnDestroy() {
+        this.userSub.unsubscribe();
+    }
 
     get currentChallenge(): Observable<Challenge> {
         return this._currentChallenge.asObservable();
     }
 
     fetchChallenges() {
-        return this.http.get<Challenge>(this.url).pipe(
+        return this.authService.user.pipe(
+            switchMap((user) => {
+                if (!user || !user.isAuth) {
+                    return;
+                }
+                return this.http.get<Challenge>(this.url(user.id, user.token));
+            }),
             tap((resData) => {
                 if (resData) {
                     const loadedChallenge = new Challenge(
@@ -27,12 +43,15 @@ export class ChallengeService {
                         resData.year,
                         resData.month,
                         resData._days
-                      );
-                      this._currentChallenge.next(loadedChallenge);
+                    );
+                    this._currentChallenge.next(loadedChallenge);
                 }
             }),
             mapTo(true),
-            catchError((error) => of(false))
+            catchError((error) => {
+                console.log("Ssusus", error);
+                return of(false);
+            })
         );
     }
 
@@ -71,8 +90,22 @@ export class ChallengeService {
     }
 
     private saveToServer(challenge: Challenge) {
-        this.http.put(this.url, challenge).subscribe((res) => {
-            console.log("Updated");
-        });
+        this.authService.user
+            .pipe(
+                switchMap((user) => {
+                    if (!user || !user.isAuth) return;
+                    return this.http.put(
+                        this.url(user.id, user.token),
+                        challenge
+                    );
+                })
+            )
+            .subscribe((res) => {
+                console.log("Updated");
+            });
+    }
+
+    private url(userId: string, token) {
+        return `https://challenge-nativescript.firebaseio.com/challenge/${userId}.json?auth=${token}`;
     }
 }

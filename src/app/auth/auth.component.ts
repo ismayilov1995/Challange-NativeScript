@@ -1,6 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { RouterExtensions } from "@nativescript/angular";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { AuthService } from "./auth.service";
+import { Subscription } from "rxjs";
+import { Observable } from "tns-core-modules/ui/page";
 
 @Component({
     selector: "ns-auth",
@@ -10,8 +13,12 @@ import { FormGroup, FormControl, Validators } from "@angular/forms";
 export class AuthComponent implements OnInit {
     form: FormGroup;
     isLogin = true;
+    isLoading = false;
 
-    constructor(private router: RouterExtensions) {}
+    constructor(
+        private router: RouterExtensions,
+        private authservice: AuthService
+    ) {}
 
     ngOnInit(): void {
         this.form = new FormGroup({
@@ -26,13 +33,42 @@ export class AuthComponent implements OnInit {
     }
 
     onSubmit(): void {
-        if (this.form.valid) return;
+        if (this.form.invalid) return;
+        this.isLoading = true;
         if (this.isLogin) {
-            this.form.reset();
-            this.router.navigate(["/challenges"], { clearHistory: true });
+            this.authservice
+                .login(
+                    this.form.get("email").value,
+                    this.form.get("password").value
+                )
+                .subscribe(
+                    (res) => {
+                        this.isLoading = false;
+                        this.router.navigate(["/challenges"], {
+                            clearHistory: true,
+                        });
+                    },
+                    (error) => {
+                        this.isLoading = false;
+                    }
+                );
         } else {
-            console.log("Registration");
-            this.router.navigate(["/challenges"], { clearHistory: true });
+            this.authservice
+                .signup(
+                    this.form.get("email").value,
+                    this.form.get("password").value
+                )
+                .subscribe(
+                    (res) => {
+                        this.isLoading = false;
+                        this.router.navigate(["/challenges"], {
+                            clearHistory: true,
+                        });
+                    },
+                    (error) => {
+                        this.isLoading = false;
+                    }
+                );
         }
     }
 

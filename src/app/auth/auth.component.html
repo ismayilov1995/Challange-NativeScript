@@ -70,7 +70,9 @@
   <Button
     [text]="isLogin ? 'Login' : 'Signup'"
     class="btn btn-primary btn-rounded-lg"
-    [isEnabled]="form.invalid"
+    [isEnabled]="form.valid"
     (tap)="onSubmit()"
+    *ngIf="!isLoading"
   ></Button>
+  <ActivityIndicator [busy]="isLoading"></ActivityIndicator>
 </StackLayout>
