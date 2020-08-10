@@ -38,6 +38,9 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
                 this.drawer.toggleDrawerState();
             }
         });
+        this.authService.autoLogin().subscribe((success) => {
+            console.log(success);
+        });
     }
 
     ngAfterViewInit(): void {

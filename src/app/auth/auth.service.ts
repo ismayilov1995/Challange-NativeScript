@@ -1,8 +1,14 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { tap, catchError } from "rxjs/operators";
-import { throwError, BehaviorSubject } from "rxjs";
+import { throwError, BehaviorSubject, of } from "rxjs";
 import { alert } from "tns-core-modules/ui/dialogs";
+import {
+    setString,
+    getString,
+    hasKey,
+    remove,
+} from "tns-core-modules/application-settings";
 import { User } from "./User.model";
 import { RouterExtensions } from "nativescript-angular/router";
 
@@ -38,8 +44,8 @@ export class AuthService {
                     if (res && res.idToken) {
                         this.handleLogin(
                             res.email,
-                            res.localId,
                             res.idToken,
+                            res.localId,
                             parseInt(res.expiresIn)
                         );
                     }
@@ -74,17 +80,47 @@ export class AuthService {
 
     logout() {
         this._user.next(null);
+        remove("userData");
         this.router.navigate(["/"], { clearHistory: true });
+    }
+
+    autoLogin() {
+        if (!hasKey("userData")) {
+            return of(false);
+        }
+        const userData: {
+            email: string;
+            id: string;
+            _token: string;
+            _tokenExpirationDate: string;
+        } = JSON.parse(getString("userData"));
+
+        const loadedUser = new User(
+            userData.email,
+            userData.id,
+            userData._token,
+            new Date(userData._tokenExpirationDate)
+        );
+
+        if (loadedUser.isAuth) {
+            this._user.next(loadedUser);
+            this.router.navigate(["/challenges"], { clearHistory: true });
+            return of(true);
+        }
+        return of(false);
     }
 
     private handleLogin(
         email: string,
-        userId: string,
         token: string,
+        userId: string,
         expiresIn: number
     ) {
-        const expDate = new Date(new Date().getDate() + expiresIn * 1000);
-        const user = new User(email, userId, token, expDate);
+        const expirationDate = new Date(
+            new Date().getTime() + expiresIn * 1000
+        );
+        const user = new User(email, userId, token, expirationDate);
+        setString("userData", JSON.stringify(user));
         this._user.next(user);
     }
 

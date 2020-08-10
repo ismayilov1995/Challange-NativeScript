@@ -21,6 +21,9 @@ export class ChallengeService {
     fetchChallenges() {
         return this.authService.user.pipe(
             switchMap((user) => {
+                if (!user || !user.isAuth) {
+                    return;
+                }
                 return this.http.get<Challenge>(
                     `${this.url}?auth=${user.token}`
                 );
@@ -39,7 +42,7 @@ export class ChallengeService {
             }),
             mapTo(true),
             catchError((error) => {
-                console.log(error);
+                console.log("Ssusus", error);
                 return of(false);
             })
         );
@@ -83,6 +86,7 @@ export class ChallengeService {
         this.authService.user
             .pipe(
                 switchMap((user) => {
+                    if (!user || !user.isAuth) return;
                     return this.http.put(
                         `${this.url}?auth=${user.token}`,
                         challenge
