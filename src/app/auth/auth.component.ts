@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { RouterExtensions } from "@nativescript/angular";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { AuthService } from "./auth.service";
 
 @Component({
     selector: "ns-auth",
@@ -11,7 +12,10 @@ export class AuthComponent implements OnInit {
     form: FormGroup;
     isLogin = true;
 
-    constructor(private router: RouterExtensions) {}
+    constructor(
+        private router: RouterExtensions,
+        private authservice: AuthService
+    ) {}
 
     ngOnInit(): void {
         this.form = new FormGroup({
@@ -26,13 +30,21 @@ export class AuthComponent implements OnInit {
     }
 
     onSubmit(): void {
-        if (this.form.valid) return;
+        if (this.form.invalid) return;
         if (this.isLogin) {
             this.form.reset();
             this.router.navigate(["/challenges"], { clearHistory: true });
         } else {
-            console.log("Registration");
-            this.router.navigate(["/challenges"], { clearHistory: true });
+            this.authservice
+                .signup(
+                    this.form.get("email").value,
+                    this.form.get("password").value
+                )
+                .subscribe((res) => {
+                    this.router.navigate(["/challenges"], {
+                        clearHistory: true,
+                    });
+                });
         }
     }
 

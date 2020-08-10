@@ -70,7 +70,7 @@
   <Button
     [text]="isLogin ? 'Login' : 'Signup'"
     class="btn btn-primary btn-rounded-lg"
-    [isEnabled]="form.invalid"
+    [isEnabled]="form.valid"
     (tap)="onSubmit()"
   ></Button>
 </StackLayout>
