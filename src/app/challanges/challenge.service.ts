@@ -2,8 +2,9 @@ import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable, of } from "rxjs";
 import { Challenge } from "./challenge.model";
 import { DayStatus } from "./day.model";
-import { take, tap, map, catchError, mapTo } from "rxjs/operators";
+import { take, tap, map, catchError, mapTo, switchMap } from "rxjs/operators";
 import { HttpClient } from "@angular/common/http";
+import { AuthService } from "../auth/auth.service";
 
 @Injectable({ providedIn: "root" })
 export class ChallengeService {
@@ -11,14 +12,19 @@ export class ChallengeService {
         "https://challenge-nativescript.firebaseio.com/challenge.json";
     private _currentChallenge = new BehaviorSubject<Challenge>(null);
 
-    constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient, private authService: AuthService) {}
 
     get currentChallenge(): Observable<Challenge> {
         return this._currentChallenge.asObservable();
     }
 
     fetchChallenges() {
-        return this.http.get<Challenge>(this.url).pipe(
+        return this.authService.user.pipe(
+            switchMap((user) => {
+                return this.http.get<Challenge>(
+                    `${this.url}?auth=${user.token}`
+                );
+            }),
             tap((resData) => {
                 if (resData) {
                     const loadedChallenge = new Challenge(
@@ -27,12 +33,15 @@ export class ChallengeService {
                         resData.year,
                         resData.month,
                         resData._days
-                      );
-                      this._currentChallenge.next(loadedChallenge);
+                    );
+                    this._currentChallenge.next(loadedChallenge);
                 }
             }),
             mapTo(true),
-            catchError((error) => of(false))
+            catchError((error) => {
+                console.log(error);
+                return of(false);
+            })
         );
     }
 
