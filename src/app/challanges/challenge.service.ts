@@ -80,8 +80,17 @@ export class ChallengeService {
     }
 
     private saveToServer(challenge: Challenge) {
-        this.http.put(this.url, challenge).subscribe((res) => {
-            console.log("Updated");
-        });
+        this.authService.user
+            .pipe(
+                switchMap((user) => {
+                    return this.http.put(
+                        `${this.url}?auth=${user.token}`,
+                        challenge
+                    );
+                })
+            )
+            .subscribe((res) => {
+                console.log("Updated");
+            });
     }
 }

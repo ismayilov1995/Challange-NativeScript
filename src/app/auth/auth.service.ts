@@ -4,6 +4,7 @@ import { tap, catchError } from "rxjs/operators";
 import { throwError, BehaviorSubject } from "rxjs";
 import { alert } from "tns-core-modules/ui/dialogs";
 import { User } from "./User.model";
+import { RouterExtensions } from "nativescript-angular/router";
 
 const FIREBASE_API = "AIzaSyDpzC8ApalwDibZv4BOSgmjSJg0bvi16ag";
 
@@ -15,7 +16,7 @@ export class AuthService {
     private loginUrl = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${FIREBASE_API}`;
     private _user = new BehaviorSubject<User>(null);
 
-    constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient, private router: RouterExtensions) {}
 
     get user() {
         return this._user.asObservable();
@@ -69,6 +70,11 @@ export class AuthService {
                     }
                 })
             );
+    }
+
+    logout() {
+        this._user.next(null);
+        this.router.navigate(["/"], { clearHistory: true });
     }
 
     private handleLogin(
