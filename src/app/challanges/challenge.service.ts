@@ -1,5 +1,5 @@
-import { Injectable } from "@angular/core";
-import { BehaviorSubject, Observable, of } from "rxjs";
+import { Injectable, OnDestroy } from "@angular/core";
+import { BehaviorSubject, Observable, of, Subscription } from "rxjs";
 import { Challenge } from "./challenge.model";
 import { DayStatus } from "./day.model";
 import { take, tap, map, catchError, mapTo, switchMap } from "rxjs/operators";
@@ -7,12 +7,21 @@ import { HttpClient } from "@angular/common/http";
 import { AuthService } from "../auth/auth.service";
 
 @Injectable({ providedIn: "root" })
-export class ChallengeService {
-    private url =
-        "https://challenge-nativescript.firebaseio.com/challenge.json";
+export class ChallengeService implements OnDestroy {
     private _currentChallenge = new BehaviorSubject<Challenge>(null);
+    private userSub: Subscription;
 
-    constructor(private http: HttpClient, private authService: AuthService) {}
+    constructor(private http: HttpClient, private authService: AuthService) {
+        this.userSub = authService.user.subscribe((user) => {
+            if (!user) {
+                this._currentChallenge.next(null);
+            }
+        });
+    }
+
+    ngOnDestroy() {
+        this.userSub.unsubscribe();
+    }
 
     get currentChallenge(): Observable<Challenge> {
         return this._currentChallenge.asObservable();
@@ -24,9 +33,7 @@ export class ChallengeService {
                 if (!user || !user.isAuth) {
                     return;
                 }
-                return this.http.get<Challenge>(
-                    `${this.url}?auth=${user.token}`
-                );
+                return this.http.get<Challenge>(this.url(user.id, user.token));
             }),
             tap((resData) => {
                 if (resData) {
@@ -88,7 +95,7 @@ export class ChallengeService {
                 switchMap((user) => {
                     if (!user || !user.isAuth) return;
                     return this.http.put(
-                        `${this.url}?auth=${user.token}`,
+                        this.url(user.id, user.token),
                         challenge
                     );
                 })
@@ -96,5 +103,9 @@ export class ChallengeService {
             .subscribe((res) => {
                 console.log("Updated");
             });
+    }
+
+    private url(userId: string, token) {
+        return `https://challenge-nativescript.firebaseio.com/challenge/${userId}.json?auth=${token}`;
     }
 }
